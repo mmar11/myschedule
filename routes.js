@@ -9,6 +9,8 @@ const upload = multer({ dest: 'uploads/' })
 
 
 routes.get('/', c.controlIndex)
+routes.get('/objetivos', c.controlObjetivos)
+
 
 // routes.get('/', c.controlIndex)
 
