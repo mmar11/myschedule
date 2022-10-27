@@ -1,14 +1,14 @@
 import { Router } from "express"
 import multer from 'multer'
+import * as c from './src/controller/control.js'
+
 
 const routes = Router()
 
 const upload = multer({ dest: 'uploads/' })
 
 
-routes.get('/', (req, res) => {
-    res.send('index.html')
-})
+routes.get('/', c.controlIndex)
 
 // routes.get('/', c.controlIndex)
 
