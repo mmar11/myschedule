@@ -15,6 +15,7 @@ routes.get('/objetivos/usr/:usr', c.getObjetivosUsr)
 routes.get('/tarefas/usr/:usr', c.getTarefasUsr)
 routes.get('/tarefas/id/:id', c.getTarefasId)
 routes.get('/tarefas/gestao/:usr', c.getTarefasGestao)
+routes.get('/usrgestao/:usr', c.getUsrGestao)
 
 
 

@@ -56,5 +56,19 @@ let getTarefasGestao = async (req, res) => {
     res.send(objetivos)
 }
 
+let getUsrGestao = async (req, res) => {
+    const TABLE = 'conexoes'
+    let usr = [req.params.usr]
+    let col = 'usr_gestor'
 
-export { controlIndex, getObjetivos, getObjetivosId, getObjetivosUsr, getTarefasId, getTarefasUsr, getTarefasGestao }
+    let resp = await f.getAllByParam(TABLE, col, usr)
+
+
+    res.send(resp)
+
+    // let differenca = (objetivos[0].prazo_final - objetivos[0].data_inclusao) / 1000 / 60 / 60
+
+}
+
+
+export { controlIndex, getObjetivos, getObjetivosId, getObjetivosUsr, getTarefasId, getTarefasUsr, getTarefasGestao, getUsrGestao }
