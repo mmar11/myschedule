@@ -16,18 +16,15 @@ async function getAllObjetivos(table) {
 }
 
 
-async function getAllObjetivosById(table, param) {
-    let objetivos = await connect(`SELECT * FROM  ${table} WHERE id_objetivo= ?`, param)
-    return objetivos
-}
-
-async function getAllObjetivosByUsr(table, param) {
-    let objetivos = await connect(`SELECT * FROM  ${table} WHERE id_usuario= ?`, param)
-    return objetivos
+async function getAllByParam(table, col, param) {
+    let consulta = await connect(`SELECT * FROM  ${table} WHERE ${col}= ?`, param)
+    return consulta
 }
 
 
 
 
 
-export { getAllObjetivos, getAllObjetivosById, getAllObjetivosByUsr }
+
+
+export { getAllObjetivos, getAllByParam }
