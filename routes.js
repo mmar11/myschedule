@@ -16,6 +16,9 @@ routes.get('/tarefas/usr/:usr', c.getTarefasUsr)
 routes.get('/tarefas/id/:id', c.getTarefasId)
 routes.get('/tarefas/gestao/:usr', c.getTarefasGestao)
 routes.get('/usrgestao/:usr', c.getUsrGestao)
+routes.post('/objetivo/novo', c.insertObjetivo)
+routes.post('/tarefa/novo', c.insertTarefa)
+routes.put('/tarefa/edit/:idtarefa', c.editTarefas)
 
 
 
