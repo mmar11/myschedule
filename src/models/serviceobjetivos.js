@@ -56,5 +56,21 @@ async function updateTarefaByID(table, param) {
     return update
 }
 
+async function updateObjetioByID(table, param) {
+
+    let update = await connect(`UPDATE ${table} SET  coins_ganhos = ? ,  feito = ?   WHERE id_objetivo = ?`, param);
+    return update
+}
+
+async function consultCoinsObj(table, param) {
+
+    let update = await connect(`UPDATE ${table} SET  coins_ganhos = ? ,  feito = ?   WHERE id_objetivo = ?`, param);
+    return update
+
+
+
+}
+
+
 
 export { getDate, getHour, getAllObjetivos, getAllByParam, insertData, updateTarefaByID }

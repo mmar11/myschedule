@@ -103,11 +103,10 @@ let editTarefas = async (req, res) => {
     const TABLE = 'tarefas'
     let idtar = req.params.idtarefa
     let { coins_ganho, obs, feito } = req.body
-
     let param = [coins_ganho, obs, feito, idtar]
-
     let objetivos = await f.updateTarefaByID(TABLE, param)
-    // let differenca = (objetivos[0].prazo_final - objetivos[0].data_inclusao) / 1000 / 60 / 60
+
+
     res.send(objetivos)
 }
 
