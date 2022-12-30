@@ -62,17 +62,20 @@ async function updateObjetioByID(table, param) {
     return update
 }
 
-async function atualizaObjs(objId, usrId) {
-    let idUsr = usrId
+async function atualizaObjsByTarefa(tarefas, ObjId) {
+    let idObj = ObjId
     const TABLE = 'objetivos'
     let col = 'id_objetivo'
-    let consult = await getAllByParam(TABLE, col, objId)
+    // let consult = await getAllByParam(TABLE, col, objId)
 
     // let update = await connect(`UPDATE ${table} SET  coins_ganhos = ? ,  feito = ?   WHERE id_objetivo = ?`, param);
-    return consult
+    return idObj
 
 }
 
 
 
-export { getDate, getHour, getAllObjetivos, getAllByParam, insertData, updateTarefaByID, updateObjetioByID, atualizaObjs }
+export {
+    getDate, getHour, getAllObjetivos, getAllByParam, insertData,
+    updateTarefaByID, updateObjetioByID, atualizaObjsByTarefa
+}

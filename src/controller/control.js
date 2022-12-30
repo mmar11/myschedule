@@ -135,10 +135,11 @@ let editTarefas = async (req, res) => {
     let param = [coins_ganho, obs, feito, editar]
     let objetivos = await f.updateTarefaByID(TABLE, param)
     let objIdEditado
+    let editada
     if (objetivos.affectedRows) {
         let col = 'id_tarefa'
         let param = [editar]
-        let editada = await f.getAllByParam(TABLE, col, param)
+        editada = await f.getAllByParam(TABLE, col, param)
         objIdEditado = editada[0].obj_id
 
     } else { res.status(500).send('fail updating tarefa') }
@@ -158,18 +159,17 @@ let editTarefas = async (req, res) => {
         tarefa3 = editada[0].tarefa_id_3
         tarefaBonus = editada[0].tarefa_bonus
 
+        let atualiza = await f.atualizaObjsByTarefa([tarefa1, tarefa2, tarefa3, tarefaBonus], objIdEditado)
 
-        // let atualiza = f.atualizaObjs([tarefa1, tarefa2, tarefa3, tarefaBonus])
-
-
+        res.send(atualiza)
 
 
 
 
 
     }
-    res.send([tarefa1, tarefa2, tarefa3, tarefaBonus])
 
+    // res.send(editada)
 
 
 }
