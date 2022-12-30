@@ -8,7 +8,7 @@ let getObjetivos = async (req, res) => {
     const TABLE = 'objetivos'
     let objetivos = await f.getAllObjetivos(TABLE)
     let differenca = (objetivos[1].prazo_final - objetivos[1].data_inclusao) / 1000 / 60 / 60
-    res.send(objetivos)
+    res.json(objetivos)
 }
 
 let getObjetivosId = async (req, res) => {
