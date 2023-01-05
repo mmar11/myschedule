@@ -58,7 +58,7 @@ async function updateTarefaByID(table, param) {
 
 async function updateObjetioByID(table, param) {
 
-    let update = await connect(`UPDATE ${table} SET  tarefa_id_1 = ? , tarefa_id_2 = ? , tarefa_id_3 = ?, tarefa_bonus = ?   WHERE id_objetivo = ?`, param);
+    let update = await connect(`UPDATE ${table} SET  tarefa_id_1 = ? , tarefa_id_2 = ? , tarefa_id_3 = ?, tarefa_bonus = ? , obs = ?   WHERE id_objetivo = ?`, param);
     return update
 }
 
@@ -70,7 +70,7 @@ async function atualizaObjsByTarefa(tarefas, ObjId) {
 
     // let update = await connect(`UPDATE ${table} SET  coins_ganhos = ? ,  feito = ?   WHERE id_objetivo = ?`, param);
     return idObj
-
+    //PAREI AQUI!!!
 }
 
 

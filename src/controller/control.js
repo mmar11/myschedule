@@ -8,6 +8,7 @@ let getObjetivos = async (req, res) => {
     const TABLE = 'objetivos'
     let objetivos = await f.getAllObjetivos(TABLE)
     let differenca = (objetivos[1].prazo_final - objetivos[1].data_inclusao) / 1000 / 60 / 60
+    // console.log(objetivos[1].prazo_final)
     res.json(objetivos)
 }
 
@@ -81,9 +82,9 @@ let getUsr = async (req, res) => {
 let insertObjetivo = async (req, res) => {
     const TABLE = 'objetivos'
 
-    let { nome_objetivo, prazo_final, hora_prazo_final, coins_total, coins_ganhos, tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus, id_usuario, id_gestor, feito } = req.body
-    let param = [nome_objetivo, prazo_final, hora_prazo_final, f.getDate(), f.getHour(), coins_total, coins_ganhos, tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus, id_usuario, id_gestor, feito]
-    let col = 'nome_objetivo ,prazo_final , hora_prazo_final , data_inclusao , hora_inclusao , coins_total , coins_ganhos , tarefa_id_1, tarefa_id_2 , tarefa_id_3, tarefa_bonus , id_usuario , id_gestor , feito'
+    let { nome_objetivo, prazo_final, hora_prazo_final, coins_total, coins_ganhos, tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus, id_usuario, id_gestor, feito, obs } = req.body
+    let param = [nome_objetivo, prazo_final, hora_prazo_final, f.getDate(), f.getHour(), coins_total, coins_ganhos, tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus, id_usuario, id_gestor, feito, obs]
+    let col = 'nome_objetivo ,prazo_final , hora_prazo_final , data_inclusao , hora_inclusao , coins_total , coins_ganhos , tarefa_id_1, tarefa_id_2 , tarefa_id_3, tarefa_bonus , id_usuario , id_gestor , feito , obs'
     let resp = await f.insertData(TABLE, col, param)
     let newid = [resp.insertId]
     if (resp.affectedRows > 0) {
@@ -98,9 +99,9 @@ let insertObjetivo = async (req, res) => {
 let editObjetivo = async (req, res) => {
     const TABLE = 'objetivos'
     let editar = req.params.idobjetivo
-    let { tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus } = req.body
+    let { tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus, obs } = req.body
 
-    let param = [tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus, editar]
+    let param = [tarefa_id_1, tarefa_id_2, tarefa_id_3, tarefa_bonus, obs, editar]
     let resp = await f.updateObjetioByID(TABLE, param)
 
     if (resp.affectedRows > 0) {
@@ -116,9 +117,9 @@ let editObjetivo = async (req, res) => {
 let insertTarefa = async (req, res) => {
     const TABLE = 'tarefas'
 
-    let { nome_tarefa, prazo_tarefa, hora_prazo_tarefa, coins_total, coins_ganho, usr_id, gestao_id, obs, obj_id, feito } = req.body
-    let param = [nome_tarefa, prazo_tarefa, hora_prazo_tarefa, coins_total, coins_ganho, usr_id, gestao_id, obs, obj_id, feito]
-    let col = 'nome_tarefa, prazo_tarefa, hora_prazo_tarefa, coins_total, coins_ganho, usr_id, gestao_id, obs, obj_id, feito'
+    let { nome_tarefa, prazo_tarefa, hora_prazo_tarefa, coins_total, coins_ganho, usr_id, gestao_id, obs, obj_id, feito, reminde } = req.body
+    let param = [nome_tarefa, prazo_tarefa, hora_prazo_tarefa, coins_total, coins_ganho, usr_id, gestao_id, obs, obj_id, feito, reminde]
+    let col = 'nome_tarefa, prazo_tarefa, hora_prazo_tarefa, coins_total, coins_ganho, usr_id, gestao_id, obs, obj_id, feito , reminde'
     let resp = await f.insertData(TABLE, col, param)
     let newid = [resp.insertId]
     if (resp.affectedRows > 0) {
@@ -131,8 +132,8 @@ let insertTarefa = async (req, res) => {
 let editTarefas = async (req, res) => {
     const TABLE = 'tarefas'
     let editar = req.params.idtarefa
-    let { coins_ganho, obs, feito } = req.body
-    let param = [coins_ganho, obs, feito, editar]
+    let { coins_ganho, obs, feito, reminde } = req.body
+    let param = [coins_ganho, obs, feito, reminde, editar]
     let objetivos = await f.updateTarefaByID(TABLE, param)
     let objIdEditado
     let editada
@@ -148,6 +149,7 @@ let editTarefas = async (req, res) => {
     let tarefa2
     let tarefa3
     let tarefaBonus
+    let reminder
 
     if (objIdEditado) {
         const TABLE = 'objetivos'
@@ -158,12 +160,13 @@ let editTarefas = async (req, res) => {
         tarefa2 = editada[0].tarefa_id_2
         tarefa3 = editada[0].tarefa_id_3
         tarefaBonus = editada[0].tarefa_bonus
+        reminder = editada[0].reminde
 
-        let atualiza = await f.atualizaObjsByTarefa([tarefa1, tarefa2, tarefa3, tarefaBonus], objIdEditado)
+
+        let atualiza = await f.atualizaObjsByTarefa([tarefa1, tarefa2, tarefa3, tarefaBonus, reminder], objIdEditado)
 
         res.send(atualiza)
-
-
+        ///PAREI AQUI!! 
 
 
 
